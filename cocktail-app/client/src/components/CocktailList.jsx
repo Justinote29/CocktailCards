@@ -31,7 +31,10 @@ const CocktailList = (props) => {
   //               so they are easy to find.
 
   //These are used to toggle on and off the ingredients and instructions.  When that flat is set to true, onClick, the ingredients and instructs pop up.
-  const [flag, setFlag] = useState(false);
+  // const [flag, setFlag] = useState(false);
+
+  //state for card flip
+  const [flip, setFlip] = useState(false);
 
   // Feedback: the id here is undefined.  Since it is coming from the state which has
   //           not received any values. It is an empty array. I'm not sure what's
@@ -43,9 +46,9 @@ const CocktailList = (props) => {
   //in the OnClickHandler I'm setting the cocktailid to look up the cocktail instructions and ingredients with the api call.  I returned the results from the api call and called them instructions, but they really hold all the cocktail details including measurements and ingredients.    The ingredients are returned as individual items in an object so I had to search for them by filtering for keys that include "strIngredient", then I had to get rid of the items starting with strIngredient that had a value of null (depending on the number of ingredients they have, to return only keys that contained ingredients as values (ingredientsList variable).  I then use setIngredients to set ingredients to Object.values(ingredientsList) so it's an array and I can map over it to render each item as a list item.  I do the same thing for the measurement items to create a list of measurements that correspond to each ingredient.
 
   const onClickHandler = (id) => {
+    setFlip(!flip);
     setId(id);
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-    setFlag(!flag);
 
     fetch(endpoint)
       .then((response) => {
@@ -84,39 +87,35 @@ const CocktailList = (props) => {
   }, [instructions]);
 
   return (
-    <div className="cocktail card-wrapper">
-      <Accordion onClick={() => onClickHandler(cocktailid)}>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>
+    <div className="container">
+      <div className={`card ${flip ? "flip" : ""}`}>
+        <div className="front" onClick={() => onClickHandler(cocktailid)}>
+          <Card.Title className="cocktailName">
             <h3>{cocktailName}</h3>
-            <img src={cocktailImage} alt={cocktailName} />
+            <img className="image" src={cocktailImage} alt={cocktailName} />
+          </Card.Title>
+        </div>
+        <div className="back" onClick={() => setFlip(!flip)}>
+          <h5 className="title">Ingredients</h5>
+          <div className="listDiv">
+            <ul className="ingredients">
+              {measurements.map((measurement) => (
+                <li key={measurement}>{measurement}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="listDiv">
+            <ul className="ingredients">
+              {ingredients.map((ingredient) => (
+                <li key={ingredient}>{ingredient}</li>
+              ))}
+            </ul>
+          </div>
 
-            {flag && (
-              <>
-                <h5 className="title">Ingredients</h5>
-                <div className="listDiv">
-                  <ul className="ingredients">
-                    {measurements.map((measurement) => (
-                      <li key={measurement}>{measurement}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="listDiv">
-                  <ul className="ingredients">
-                    {ingredients.map((ingredient) => (
-                      <li key={ingredient}>{ingredient}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <h5 className="title">Instructions</h5>
-                <p className="instructions">{instructions.strInstructions}</p>
-              </>
-            )}
-          </Accordion.Header>
-          <Accordion.Body></Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+          <h5 className="title">Instructions</h5>
+          <p className="instructions">{instructions.strInstructions}</p>
+        </div>
+      </div>
     </div>
   );
 };
