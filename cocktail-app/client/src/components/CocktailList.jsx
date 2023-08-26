@@ -97,19 +97,21 @@ const CocktailList = (props) => {
         </div>
         <div className="back" onClick={() => setFlip(!flip)}>
           <h5 className="title">Ingredients</h5>
-          <div className="listDiv">
-            <ul className="ingredients">
-              {measurements.map((measurement) => (
-                <li key={measurement}>{measurement}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="listDiv">
-            <ul className="ingredients">
-              {ingredients.map((ingredient) => (
-                <li key={ingredient}>{ingredient}</li>
-              ))}
-            </ul>
+          <div className="listContainer">
+            <div className="listDiv">
+              <ul className="ingredients">
+                {measurements.map((measurement) => (
+                  <li key={measurement}>{measurement}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="listDiv">
+              <ul className="ingredients">
+                {ingredients.map((ingredient) => (
+                  <li key={ingredient}>{ingredient}</li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <h5 className="title">Instructions</h5>
