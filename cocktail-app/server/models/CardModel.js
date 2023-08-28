@@ -4,13 +4,13 @@ const userSchema = mongoose.Schema({
   strDrink: {
     type: String,
     trim: true,
-    minLength: [1, "Must be at least 1 character."],
+    minLength: [1, "Must include a cocktail name."],
     required: true,
   },
   strInstructions: {
     type: String,
     trim: true,
-    minLength: [1, "Must be at least 1 character."],
+    minLength: [1, "Must include instructions."],
     required: true,
   },
   strImageSource: {
@@ -19,9 +19,15 @@ const userSchema = mongoose.Schema({
   strIngredient1: {
     type: String,
     required: true,
+    trim: true,
+    minLength: [1, "Must include at least 2 ingredients."],
+    required: true,
   },
   strIngredient2: {
     type: String,
+    required: true,
+    trim: true,
+    minLength: [1, "Must include at least 2 ingredients."],
     required: true,
   },
   strIngredient3: {
@@ -37,6 +43,9 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   strIngredient7: {
+    type: String,
+  },
+  strIngredient8: {
     type: String,
   },
   strMeasure1: {
@@ -63,6 +72,9 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   strMeasure7: {
+    type: String,
+  },
+  strMeasure8: {
     type: String,
   },
 });

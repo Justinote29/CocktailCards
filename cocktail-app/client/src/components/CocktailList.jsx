@@ -1,9 +1,5 @@
-import Accordion from "react-bootstrap/Accordion";
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateRight, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { Card, CardGroup, Button } from "react-bootstrap";
 
 // Todo- Get bootstrap accordion to work correctly. Fit api call-  Why do you have to click twice on the cocktails to get the recipe to appear.  Maybe try and convert to cards that turn around and reveal the recipe/ingredients when clicked.
 
@@ -87,17 +83,27 @@ const CocktailList = (props) => {
   }, [instructions]);
 
   return (
-    <div className="container">
-      <div className={`card ${flip ? "flip" : ""}`}>
+    <>
+      <Card className={`card ${flip ? "flip" : ""}`}>
         <div className="front" onClick={() => onClickHandler(cocktailid)}>
-          <Card.Title className="cocktailName">
-            <h3>{cocktailName}</h3>
-            <img className="image" src={cocktailImage} alt={cocktailName} />
-          </Card.Title>
+          <Card.Body className="cardBody">
+            <Card.Title className="cocktailName">
+              <h3 className="cocktailTitle">{cocktailName}</h3>
+            </Card.Title>
+            <div className="imageDiv">
+              <Card.Img
+                variant="bottom"
+                className="image"
+                src={cocktailImage}
+                alt={cocktailName}
+              />
+            </div>
+          </Card.Body>
         </div>
-        <div className="back" onClick={() => setFlip(!flip)}>
+        <Card.Text className="back" onClick={() => setFlip(!flip)}>
           <h5 className="title">Ingredients</h5>
-          <div className="listContainer">
+          <div className="lists">
+
             <div className="listDiv">
               <ul className="ingredients">
                 {measurements.map((measurement) => (
@@ -116,9 +122,9 @@ const CocktailList = (props) => {
 
           <h5 className="title">Instructions</h5>
           <p className="instructions">{instructions.strInstructions}</p>
-        </div>
-      </div>
-    </div>
+        </Card.Text>
+      </Card>
+    </>
   );
 };
 

@@ -5,20 +5,25 @@
   text-align: center;
 }
 
-img {
-  width: 300px;
-}
-
 body {
   background-color: rgb(245, 233, 212);
   background-image: url("../src/assets/bar2.avif");
   background-repeat: repeat;
   background-position: center;
+  background-attachment: fixed;
 }
 
-.cocktail {
-  margin: 20px;
-  max-width: 350px;
+.nav {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  font-size: large;
+}
+
+.nav li {
+  margin: 10px;
+  list-style-type: none;
 }
 
 .instructions {
@@ -27,7 +32,7 @@ body {
 
 h1,
 h3 {
-  color: rgb(190, 189, 205);
+  color: rgb(57, 145, 116);
   text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
 }
@@ -40,11 +45,6 @@ h3 {
   margin-right: 0;
 }
 
-.title {
-  padding-top: 15px;
-  margin: 0;
-}
-
 .listDiv {
   display: inline-block;
   width: 130px;
@@ -52,32 +52,29 @@ h3 {
   margin: 0;
 }
 
-.listContainer {
+.cocktailListContainer {
   display: flex;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 50px;
+  padding: 0;
 }
+
 .card {
-  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   transform-style: preserve-3d;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
-  height: 350px;
-  width: 300px;
-  margin: 60px;
+  margin: 200px;
   border-radius: 20px;
   background-color: white;
   transition: 500ms;
-  color: black;
+  padding: 0;
 }
 
 .card:hover {
@@ -95,6 +92,18 @@ h3 {
 .card .back {
   position: absolute;
   backface-visibility: hidden;
+  height: 375px;
+  width: 300px;
+}
+
+.front {
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: white;
 }
 
 .card .back {
@@ -105,36 +114,67 @@ h3 {
 }
 
 .back {
-  width: fit-content;
+  padding-top: 20px;
   overflow: scroll;
   height: 350px;
   width: 300px;
   border-radius: 15px;
 }
 
-.image {
+.card .image {
+  height: 294px;
+  margin: 0;
+  padding: 0;
+  object-fit: cover;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 }
 
-.front {
-  border-radius: 15px;
-  height: 350px;
-  width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-}
-
 .cocktailName {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
-  height: 350px;
   width: 300px;
-  max-width: 275px;
+  height: 75px;
   background-color: white;
+  padding-top: 15px;
+  margin-bottom: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
+
+.cocktailTitle {
+  color: rgb(57, 145, 116);
+}
+
+.createCard {
+  width: 40rem;
+  height: 40rem;
+  margin-top: 50px;
+  padding: 0;
+}
+
+.createButton {
+  background-color: rgb(3, 210, 210);
+}
+
+.createCocktailName {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.searchContainer {
+  margin-top: 125px;
+  color: rgb(57, 145, 116);
+}
+
+.cocktailCardsContainer {
+  margin-top: 125px;
+  color: rgb(57, 145, 116);
+}
+
+.createTitle {
+  margin-top: 200px;
+  color: rgb(57, 145, 116);
+}
+
