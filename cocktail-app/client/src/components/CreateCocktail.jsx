@@ -1,14 +1,47 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { useState } from "react";
 
 const CreateCocktail = () => {
+  //TODO- how to connect to backend in REACT?
+  // const onSubmitHandler = (e) => {
+  //   const [data, setData] = useState();
+  //   let strDrink = {
+  //     cocktailName: $(this).val().trim().substring(0, 30),
+  //   };
+  //   console.log(strDrink);
+
+  //   let endpoint = `/`;
+
+  //   fetch(endpoint, {
+  //     method: "POST", //tells which verb to use
+  //     headers: {
+  //       "Content-Type": "application/json", //we're putting it in header to say we accept and send json.
+  //     },
+  //     body: JSON.stringify(strDrink),
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       }
+  //       throw Error("Cannot send data for create in server");
+  //     })
+  //     .then((data) => {
+  //       //Here we need to create our new card and add it to our list of cards in MyCards
+  //     })
+  //     .catch((err) => {
+  //       console.error(`Error creating data in client: `, err);
+  //     });
+  // };
+
   return (
     <>
       <h1 className="createTitle">Create a Cocktail Card</h1>
       <Card className="createCard">
-        <form action="">
+        <br />
+        <form>
           <label htmlFor="cocktailName">
-            <span className="createCocktailName">Cocktail name:</span>
+            <h2 className="createCocktailName">Cocktail name:</h2>
           </label>
           <input type="text" name="cocktailName" />
           <br />
@@ -61,6 +94,10 @@ const CreateCocktail = () => {
             <br />
           </h2>
           <textarea name="instructions" id="" cols="60" rows="6"></textarea>
+          <br />
+          <br />
+          <label htmlFor="cocktailPhoto">Cocktail Photo:</label>
+          <input type="file" name="cocktailPhoto" id="cocktailPhoto" />
           <br />
           <br />
           <Button className="createButton" variant="info" type="submit">
