@@ -171,6 +171,7 @@ h3 {
 .cocktailCardsContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 125px;
   color: rgb(57, 145, 116);
 }
