@@ -21,6 +21,10 @@ const { CardModel } = require("./models/CardModel");
 //   res.redirect("/home");
 // });
 
+//user routes
+
+//cocktail routes
+
 app.get("/home", (req, res) => {
   res.send("I am home route");
 });
