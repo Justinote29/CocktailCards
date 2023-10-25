@@ -20,13 +20,16 @@ function Search() {
   };
 
   //performs api call when user presses enter.  Uses the searchTerm to complete the API call. and then setsCocktails to the data returned to then pass as props to child component.  It resets the input to an empty string and uses setFlag to goggle on the (Click cocktail for recipe) h3.
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (event) => {
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchTerm}`;
     event.preventDefault();
 
     fetch(endpoint)
       .then((response) => {
-        return response.json();
+        if (response.ok) {
+          return response.json();
+        }
+        throw Error(`Error with fetch`);
       })
       .then((data) => {
         setCocktails(data.drinks);
