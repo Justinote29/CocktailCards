@@ -5,25 +5,35 @@ const MyCocktails = () => {
   const endpoint = "http://localhost:3000/mycocktails";
   const [cocktails, setCocktails] = useState([]);
   const [data, setData] = useState({});
-  const [flip, setFlip] = useState(false);
 
   const onClickHandler = (id) => {
-    setFlip(!flip);
-    setId(id);
+    const newCocktails = cocktails.map((cocktail) => {
+      if (cocktail._id === id) {
+        return { ...cocktail, flip: !cocktail.flip };
+      } else {
+        return cocktail;
+      }
+    });
+    setCocktails(newCocktails);
   };
   // Sorting tracks in descending and using data from useState as a dependency.
   useEffect(() => {
     fetch(endpoint)
       .then((response) => response.json())
       .then((results) => {
-        const sortedCocktails = results.sort((a, b) => {
+        const sortedCocktails = [...results].sort((a, b) => {
           // Assuming 'created' is a timestamp or date string
           const dateA = new Date(a.created);
           const dateB = new Date(b.created);
-          return dateB - dateA; // Sort in descending order
+          return dateA - dateB; // Sort in descending order
         });
 
-        setCocktails(sortedCocktails);
+        // Add flip property to each cocktail object
+        const cocktailsWithFlip = sortedCocktails.map((cocktail) => {
+          return { ...cocktail, flip: false };
+        });
+
+        setCocktails(cocktailsWithFlip);
       })
       .catch((error) => {
         console.log("error coming from db:", error);
@@ -32,12 +42,12 @@ const MyCocktails = () => {
 
   return (
     <div>
-      <h1>My Cocktail Cards</h1>
+      <h1 className="myCardsTitle">My Cocktail Cards</h1>
       <div className="cocktailCardsContainer">
         {cocktails.map((cocktail) => (
           <Card
             key={cocktail._id}
-            className={`card ${flip ? "flip" : ""}`}
+            className={`card ${cocktail.flip ? "flip" : ""}`}
             onClick={() => onClickHandler(cocktail._id)}
           >
             <div className="front">
@@ -55,25 +65,26 @@ const MyCocktails = () => {
               </div> */}
               </Card.Body>
             </div>
-            <Card.Text className="back" onClick={() => setFlip(!flip)}>
+            <Card.Text className="back">
               <h5 className="title">Ingredients</h5>
-              {/* <div className="lists">
-              <div className="listDiv">
-                <ul className="ingredients">
-                  {measurements.map((measurement) => (
-                    <li key={measurement}>{measurement}</li>
-                  ))}
-                </ul>
+              <div className="lists">
+                <div className="listDiv">
+                  <ul className="ingredients">
+                    {[cocktail.strIngredient1, cocktail.strIngredient2].map(
+                      (ingredient, index) =>
+                        ingredient && <li key={index}>{ingredient}</li>
+                    )}
+                  </ul>
+                </div>
+                <div className="listDiv">
+                  <ul className="ingredients">
+                    {[cocktail.strMeasure1, cocktail.strMeasure1].map(
+                      (measurement, index) =>
+                        measurement && <li key={index}>{measurement}</li>
+                    )}
+                  </ul>
+                </div>
               </div>
-              <div className="listDiv">
-                <ul className="ingredients">
-                  {ingredients.map((ingredient) => (
-                    <li key={ingredient}>{ingredient}</li>
-                  ))}
-                </ul>
-              </div>
-            </div> */}
-
               <h5 className="title">Instructions</h5>
               <p className="instructions">{cocktail.strInstructions}</p>
             </Card.Text>

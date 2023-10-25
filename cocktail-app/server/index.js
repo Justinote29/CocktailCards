@@ -45,14 +45,22 @@ app.post("/create", upload.single("fileFieldName"), async (req, res) => {
   try {
     //pull out data from body
     //todo - add other ingredients, measurements and file
-    const { strDrink, strInstructions, strIngredient1, strIngredient2 } =
-      req.body; // fixed syntax error
+    const {
+      strDrink,
+      strInstructions,
+      strIngredient1,
+      strIngredient2,
+      strMeasure1,
+      strMeasure2,
+    } = req.body; // fixed syntax error
 
     const newCocktailCard = new CardModel({
       strDrink,
       strInstructions,
       strIngredient1,
       strIngredient2,
+      strMeasure1,
+      strMeasure2,
     });
 
     try {

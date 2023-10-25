@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const cardSchema = mongoose.Schema({
   postedBy: { type: mongoose.Schema.ObjectId, ref: "User" },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
   strDrink: {
     type: String,
     trim: true,
@@ -45,9 +49,11 @@ const cardSchema = mongoose.Schema({
   },
   strMeasure1: {
     type: String,
+    trim: true,
   },
   strMeasure2: {
     type: String,
+    trim: true,
   },
   strMeasure3: {
     type: String,
