@@ -20,7 +20,7 @@
     "react-bootstrap": "^2.8.0",
     "react-card-flip": "^1.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
+    "react-router-dom": "^6.17.0",
     "save": "^2.9.0"
   },
   "devDependencies": {
