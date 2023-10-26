@@ -10,24 +10,29 @@ const cardSchema = mongoose.Schema({
     type: String,
     trim: true,
     minLength: [1, "Must include a cocktail name."],
+    required: true,
   },
   strInstructions: {
     type: String,
     trim: true,
     minLength: [1, "Must include instructions."],
+    required: true,
   },
   strImageSource: {
     type: String,
+    //todo give default picture of cocktail
   },
   strIngredient1: {
     type: String,
     trim: true,
     minLength: [1, "Must include at least 2 ingredients."],
+    required: true,
   },
   strIngredient2: {
     type: String,
     trim: true,
     minLength: [1, "Must include at least 2 ingredients."],
+    required: true,
   },
   strIngredient3: {
     type: String,
@@ -50,10 +55,12 @@ const cardSchema = mongoose.Schema({
   strMeasure1: {
     type: String,
     trim: true,
+    required: true,
   },
   strMeasure2: {
     type: String,
     trim: true,
+    required: true,
   },
   strMeasure3: {
     type: String,

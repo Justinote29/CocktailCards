@@ -50,8 +50,21 @@ app.post("/create", upload.single("fileFieldName"), async (req, res) => {
       strInstructions,
       strIngredient1,
       strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strIngredient5,
+      strIngredient6,
+      strIngredient7,
+      strIngredient8,
       strMeasure1,
       strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strMeasure5,
+      strMeasure6,
+      strMeasure7,
+      strMeasure8,
+      strMeasure9,
     } = req.body; // fixed syntax error
 
     const newCocktailCard = new CardModel({
@@ -59,8 +72,21 @@ app.post("/create", upload.single("fileFieldName"), async (req, res) => {
       strInstructions,
       strIngredient1,
       strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strIngredient5,
+      strIngredient6,
+      strIngredient7,
+      strIngredient8,
       strMeasure1,
       strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strMeasure5,
+      strMeasure6,
+      strMeasure7,
+      strMeasure8,
+      strMeasure9,
     });
 
     try {
