@@ -66,7 +66,7 @@ app.post("/create", upload.single("fileFieldName"), async (req, res) => {
       strMeasure8,
       strMeasure9,
     } = req.body; // fixed syntax error
-
+    // variable usted to save a new cocktail with data send from frontend
     const newCocktailCard = new CardModel({
       strDrink,
       strInstructions,
@@ -88,7 +88,7 @@ app.post("/create", upload.single("fileFieldName"), async (req, res) => {
       strMeasure8,
       strMeasure9,
     });
-
+    //api call to db to save cocktail in db
     try {
       //save cocktail card in db
       const savedCocktailCard = await newCocktailCard.save();

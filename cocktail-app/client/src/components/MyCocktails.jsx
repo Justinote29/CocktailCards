@@ -6,6 +6,7 @@ const MyCocktails = () => {
   const [cocktails, setCocktails] = useState([]);
   const [data, setData] = useState({});
 
+  //received the cocktail_.id from db as an argument to control the flip only for that card by setting it's flip property to !cocktail.flip and not all cards.
   const onClickHandler = (id) => {
     const newCocktails = cocktails.map((cocktail) => {
       if (cocktail._id === id) {
@@ -28,7 +29,7 @@ const MyCocktails = () => {
           return dateA - dateB; // Sort in descending order
         });
 
-        // Add flip property to each cocktail object
+        // Add flip property to each cocktail object and sets it to false and uses state to set the cocktails as the cocktails with the flip property.
         const cocktailsWithFlip = sortedCocktails.map((cocktail) => {
           return { ...cocktail, flip: false };
         });
