@@ -98,12 +98,12 @@ const CocktailList = (props) => {
                 alt={cocktailName}
               />
             </div>
+            <Button className="saveButton">Save Cocktail</Button>
           </Card.Body>
         </div>
         <Card.Text className="back" onClick={() => setFlip(!flip)}>
           <h5 className="title">Ingredients</h5>
           <div className="lists">
-
             <div className="listDiv">
               <ul className="ingredients">
                 {measurements.map((measurement) => (

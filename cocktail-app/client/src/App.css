@@ -107,6 +107,17 @@ h3 {
   background-color: white;
 }
 
+.saveButton {
+  position: fixed;
+  top: 122px;
+  left: 60px;
+}
+
+.updateButton {
+  position: fixed;
+  bottom: 5px;
+}
+
 .card .back {
   transform: rotateY(180deg);
   background-color: white;
