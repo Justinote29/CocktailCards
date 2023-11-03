@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardGroup, Button } from "react-bootstrap";
 
-// Todo- Get bootstrap accordion to work correctly. Fit api call-  Why do you have to click twice on the cocktails to get the recipe to appear.  Maybe try and convert to cards that turn around and reveal the recipe/ingredients when clicked.
-
 const CocktailList = (props) => {
-  // Feedback: what are these about? What do they do?
   //These are variables taken from the data the first API call returned.  cocktailName is the name of the cocktail, cocktailImage the image, and cocktailId is used for the second API call to access the ingredients and instructions.  You can see the docs here- https://www.thecocktaildb.com/api.php
 
   //destructuring props to get out these vairables.
@@ -22,26 +19,23 @@ const CocktailList = (props) => {
   // used to set the measurements for each cocktail.
   const [measurements, setMeasurements] = useState([]);
 
-  // feedback: no comments on what these do?
-  //           also it's a good idea to put all the state variables together
-  //               so they are easy to find.
-
   //These are used to toggle on and off the ingredients and instructions.  When that flat is set to true, onClick, the ingredients and instructs pop up.
   // const [flag, setFlag] = useState(false);
 
   //state for card flip
   const [flip, setFlip] = useState(false);
 
-  // Feedback: the id here is undefined.  Since it is coming from the state which has
-  //           not received any values. It is an empty array. I'm not sure what's
-  //           happening here without comments
-
   //I'm setting the id with the cocktailid  in the onClickHandler (below) that is returned with each item from the first api call.  So I set the id to use in the api call since you access the ingredients and instructions like this -Lookup full cocktail details by id with 11007 being an example id in the following url.
   // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
 
-  //in the OnClickHandler I'm setting the cocktailid to look up the cocktail instructions and ingredients with the api call.  I returned the results from the api call and called them instructions, but they really hold all the cocktail details including measurements and ingredients.    The ingredients are returned as individual items in an object so I had to search for them by filtering for keys that include "strIngredient", then I had to get rid of the items starting with strIngredient that had a value of null (depending on the number of ingredients they have, to return only keys that contained ingredients as values (ingredientsList variable).  I then use setIngredients to set ingredients to Object.values(ingredientsList) so it's an array and I can map over it to render each item as a list item.  I do the same thing for the measurement items to create a list of measurements that correspond to each ingredient.
+  //in the OnClickHandler I'm setting the cocktailid and looking up the cocktail instructions and ingredients with the api call based on that id.  I returned the results from the api call and called them instructions, but they really hold all the cocktail details including measurements and ingredients.    The ingredients are returned as individual items in an object so I had to search for them by filtering for keys that include "strIngredient", then I had to get rid of the items starting with strIngredient that had a value of null (depending on the number of ingredients they have, to return only keys that contained ingredients as values (ingredientsList variable).  I then use setIngredients to set ingredients to Object.values(ingredientsList) so it's an array and I can map over it to render each item as a list item.  I do the same thing for the measurement items to create a list of measurements that correspond to each ingredient.
 
-  const onClickHandler = (id) => {
+  const onClickHandler = (id, event) => {
+    // If the clicked element is a button, stop the event propagation
+    if (event.target.tagName === "BUTTON") {
+      event.stopPropagation();
+      return;
+    }
     setFlip(!flip);
     setId(id);
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -52,10 +46,77 @@ const CocktailList = (props) => {
       })
       .then((data) => {
         setInstructions(data.drinks[0]);
+        console.log(data);
       })
       .catch((error) => {
         console.log("Error coming from API:", error);
       });
+  };
+
+  const onSaveHandler = async (event) => {
+    event.stopPropagation();
+    let strDrink = instructions.strDrink;
+    let strInstructions = instructions.strInstructions;
+    let strIngredient1 = instructions.strIngredient1;
+    let strIngredient2 = instructions.strIngredient2;
+    let strIngredient3 = instructions.strIngredient3;
+    let strIngredient4 = instructions.strIngredient4;
+    let strIngredient5 = instructions.strIngredient5;
+    let strIngredient6 = instructions.strIngredient6;
+    let strIngredient7 = instructions.strIngredient7;
+    let strIngredient8 = instructions.strIngredient8;
+    let strMeasure1 = instructions.strMeasure1;
+    let strMeasure2 = instructions.strMeasure2;
+    let strMeasure3 = instructions.strMeasure3;
+    let strMeasure4 = instructions.strMeasure4;
+    let strMeasure5 = instructions.strMeasure5;
+    let strMeasure6 = instructions.strMeasure6;
+    let strMeasure7 = instructions.strMeasure7;
+    let strMeasure8 = instructions.strMeasure8;
+    let file = instructions.strDrinkThumb;
+
+    const endpoint = "http://localhost:3000/save";
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST", //tells which verb to use
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          strDrink,
+          strInstructions,
+          strIngredient1,
+          strIngredient2,
+          strIngredient3,
+          strIngredient4,
+          strIngredient5,
+          strIngredient6,
+          strIngredient7,
+          strIngredient8,
+          strMeasure1,
+          strMeasure2,
+          strMeasure3,
+          strMeasure4,
+          strMeasure5,
+          strMeasure6,
+          strMeasure7,
+          strMeasure8,
+          file,
+        }),
+      });
+
+      if (response.ok) {
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+      } else {
+        throw Error("Cannot send data for create in server");
+      }
+    } catch (err) {
+      console.error(`Error creating data in client: `, err);
+    }
   };
 
   useEffect(() => {
@@ -85,7 +146,10 @@ const CocktailList = (props) => {
   return (
     <>
       <Card className={`card ${flip ? "flip" : ""}`}>
-        <div className="front" onClick={() => onClickHandler(cocktailid)}>
+        <div
+          className="front"
+          onClick={(event) => onClickHandler(cocktailid, event)}
+        >
           <Card.Body className="cardBody">
             <Card.Title className="cocktailName">
               <h3 className="cocktailTitle">{cocktailName}</h3>
@@ -98,7 +162,6 @@ const CocktailList = (props) => {
                 alt={cocktailName}
               />
             </div>
-            <Button className="saveButton">Save</Button>
           </Card.Body>
         </div>
         <Card.Text className="back" onClick={() => setFlip(!flip)}>
@@ -122,6 +185,9 @@ const CocktailList = (props) => {
 
           <h5 className="title">Instructions</h5>
           <p className="instructions">{instructions.strInstructions}</p>
+          <Button className="saveButton" onClick={onSaveHandler}>
+            Save
+          </Button>
         </Card.Text>
       </Card>
     </>

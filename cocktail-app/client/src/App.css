@@ -109,14 +109,14 @@ h3 {
 
 .saveButton {
   position: fixed;
-  top: 143px;
-  left: 80px;
+  bottom: 7px;
+  right: 8px;
 }
 
 .deleteButton {
   position: fixed;
-  top: 143px;
-  left: 69px;
+  bottom: 7px;
+  left: 8px;
 }
 
 .updateButton {

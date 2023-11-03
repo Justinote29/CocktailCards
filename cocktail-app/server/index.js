@@ -158,6 +158,71 @@ app.post("/create", upload.single("cocktailPhoto"), async (req, res) => {
 
 //save cocktail from cocktail DB
 
+app.post("/save", async (req, res) => {
+  //pull in data from body
+  try {
+    //pull out data from body
+    //todo - add other ingredients, measurements and file
+    const {
+      strDrink,
+      strInstructions,
+      strIngredient1,
+      strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strIngredient5,
+      strIngredient6,
+      strIngredient7,
+      strIngredient8,
+      strMeasure1,
+      strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strMeasure5,
+      strMeasure6,
+      strMeasure7,
+      strMeasure8,
+      strMeasure9,
+      file,
+    } = req.body; // fixed syntax error
+    // variable usted to save a new cocktail with data send from frontend
+    const newCocktailCard = new CardModel({
+      strDrink,
+      strInstructions,
+      strIngredient1,
+      strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strIngredient5,
+      strIngredient6,
+      strIngredient7,
+      strIngredient8,
+      strMeasure1,
+      strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strMeasure5,
+      strMeasure6,
+      strMeasure7,
+      strMeasure8,
+      strMeasure9,
+      file,
+    });
+    //api call to db to save cocktail in db
+    try {
+      //save cocktail card in db
+      const savedCocktailCard = await newCocktailCard.save();
+      res.status(201).json(savedCocktailCard); // fixed variable name
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Server error" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 //read all of a user's cocktails- for now it will read all the cocktails and later after implementing authentication and creating users we'll have it just return a single user's cocktails
 
 app.get("/mycocktails", (req, res) => {
