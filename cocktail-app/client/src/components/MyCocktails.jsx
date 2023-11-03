@@ -56,14 +56,14 @@ const MyCocktails = () => {
                 <Card.Title className="cocktailName">
                   <h3 className="cocktailTitle">{cocktail.strDrink}</h3>
                 </Card.Title>
-                {/* <div className="imageDiv">
-                <Card.Img
-                  variant="bottom"
-                  className="image"
-                  src={cocktailImage}
-                  alt={cocktailName}
-                />
-              </div> */}
+                <div className="imageDiv">
+                  <Card.Img
+                    variant="bottom"
+                    className="image"
+                    src={cocktail.file}
+                    alt={cocktail.cocktailName}
+                  />
+                </div>
               </Card.Body>
             </div>
             <Card.Text className="back">

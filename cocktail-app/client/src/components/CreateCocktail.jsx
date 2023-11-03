@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const CreateCocktail = () => {
   const [data, setData] = useState(null);
   const navigate = useNavigate();
+  const [cocktailPhoto, setCocktailPhoto] = useState(null);
 
   const [formData, setFormData] = useState({
     strDrink: "",
@@ -44,6 +45,11 @@ const CreateCocktail = () => {
     //   return alert("Description must be less than 50 characters");
     // }
   };
+  //to capture file upload
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setCocktailPhoto(file);
+  };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -66,26 +72,8 @@ const CreateCocktail = () => {
     formDataForUpload.append("strMeasure6", formData.qty6);
     formDataForUpload.append("strMeasure7", formData.qty7);
     formDataForUpload.append("strMeasure8", formData.qty8);
+    formDataForUpload.append("cocktailPhoto", cocktailPhoto);
 
-    //   strDrink: e.target.cocktailName.value.trim().substring(0, 30),
-    //   strInstructions: e.target.instructions.value.trim(),
-    //   strIngredient1: e.target.ing1.value.trim(),
-    //   strIngredient2: e.target.ing2.value.trim(),
-    //   strIngredient3: e.target.ing3.value.trim(),
-    //   strIngredient4: e.target.ing4.value.trim(),
-    //   strIngredient5: e.target.ing5.value.trim(),
-    //   strIngredient6: e.target.ing6.value.trim(),
-    //   strIngredient7: e.target.ing7.value.trim(),
-    //   strIngredient8: e.target.ing8.value.trim(),
-    //   strMeasure1: e.target.qty1.value.trim(),
-    //   strMeasure2: e.target.qty2.value.trim(),
-    //   strMeasure3: e.target.qty3.value.trim(),
-    //   strMeasure4: e.target.qty4.value.trim(),
-    //   strMeasure5: e.target.qty5.value.trim(),
-    //   strMeasure6: e.target.qty6.value.trim(),
-    //   strMeasure7: e.target.qty7.value.trim(),
-    //   strMeasure8: e.target.qty8.value.trim(),
-    // };
     const endpoint = "http://localhost:3000/create";
     for (const [name, value] of formDataForUpload.entries()) {
       console.log(`${name}: ${value}`);
@@ -264,8 +252,13 @@ const CreateCocktail = () => {
           ></textarea>
           <br />
           <br />
-          <label htmlFor="cocktailPhoto">Cocktail Photo:</label>
-          <input type="file" name="cocktailPhoto" id="cocktailPhoto" />
+          <label htmlFor="Photo">Cocktail Photo:</label>
+          <input
+            type="file"
+            name="Photo"
+            id="Photo"
+            onChange={handleFileChange}
+          />
           <br />
           <br />
           <Button className="createButton" variant="info" type="submit">

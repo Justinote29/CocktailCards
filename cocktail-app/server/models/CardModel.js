@@ -6,6 +6,11 @@ const cardSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  file: {
+    type: String,
+    default:
+      "https://mycocktailcardsimages.s3.amazonaws.com/images/1699024505629dmitry-dreyer-7hHRTw_-1SY-unsplash.jpg",
+  },
   strDrink: {
     type: String,
     trim: true,
