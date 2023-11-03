@@ -45,6 +45,8 @@ const MyCocktails = () => {
     <div>
       <h1 className="myCardsTitle">My Cocktail Cards</h1>
       <div className="cocktailCardsContainer">
+        {/* map over cocktails to make each individual cocktail a card and we
+        change the className to apply different styling for the flip. */}
         {cocktails.map((cocktail) => (
           <Card
             key={cocktail._id}
