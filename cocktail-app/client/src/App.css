@@ -109,13 +109,20 @@ h3 {
 
 .saveButton {
   position: fixed;
-  top: 122px;
-  left: 60px;
+  top: 143px;
+  left: 80px;
+}
+
+.deleteButton {
+  position: fixed;
+  top: 143px;
+  left: 69px;
 }
 
 .updateButton {
   position: fixed;
-  bottom: 5px;
+  bottom: 7px;
+  right: 8px;
 }
 
 .card .back {

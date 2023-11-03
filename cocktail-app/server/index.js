@@ -156,6 +156,8 @@ app.post("/create", upload.single("cocktailPhoto"), async (req, res) => {
 
 //delete cocktail
 
+//save cocktail from cocktail DB
+
 //read all of a user's cocktails- for now it will read all the cocktails and later after implementing authentication and creating users we'll have it just return a single user's cocktails
 
 app.get("/mycocktails", (req, res) => {

@@ -98,7 +98,7 @@ const CocktailList = (props) => {
                 alt={cocktailName}
               />
             </div>
-            <Button className="saveButton">Save Cocktail</Button>
+            <Button className="saveButton">Save</Button>
           </Card.Body>
         </div>
         <Card.Text className="back" onClick={() => setFlip(!flip)}>

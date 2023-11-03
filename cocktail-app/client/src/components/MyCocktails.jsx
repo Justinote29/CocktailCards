@@ -66,7 +66,7 @@ const MyCocktails = () => {
                     alt={cocktail.cocktailName}
                   />
                 </div>
-                <Button className="saveButton">Delete Cocktail</Button>
+                <Button className="deleteButton">Delete</Button>
               </Card.Body>
             </div>
             <Card.Text className="back">
@@ -91,7 +91,7 @@ const MyCocktails = () => {
               </div>
               <h5 className="title">Instructions</h5>
               <p className="instructions">{cocktail.strInstructions}</p>
-              <Button className="updateButton">Update Cocktail</Button>
+              <Button className="updateButton">Update</Button>
             </Card.Text>
           </Card>
         ))}
