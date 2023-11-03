@@ -9,7 +9,7 @@ const cardSchema = mongoose.Schema({
   file: {
     type: String,
     default:
-      "https://mycocktailcardsimages.s3.amazonaws.com/images/1699024505629dmitry-dreyer-7hHRTw_-1SY-unsplash.jpg",
+      "https://mycocktailcardsimages.s3.amazonaws.com/martini-154548_1280.png",
   },
   strDrink: {
     type: String,

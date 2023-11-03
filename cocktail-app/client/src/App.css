@@ -6,11 +6,12 @@
 }
 
 body {
-  background-color: rgb(245, 233, 212);
+  background-color: black;
   background-image: url("../src/assets/bar2.avif");
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  background-size: cover;
 }
 
 .nav {
