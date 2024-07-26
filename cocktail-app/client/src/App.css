@@ -107,10 +107,15 @@ h3 {
   background-color: white;
 }
 
+.ingredientsTitle {
+  display: inline;
+}
 .saveButton {
-  position: fixed;
+  position: relative;
   bottom: 7px;
-  right: 8px;
+  right: -50px;
+  align-self: end;
+  display: inline;
 }
 
 .deleteButton {

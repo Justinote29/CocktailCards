@@ -165,7 +165,10 @@ const CocktailList = (props) => {
           </Card.Body>
         </div>
         <Card.Text className="back" onClick={() => setFlip(!flip)}>
-          <h5 className="title">Ingredients</h5>
+          <h5 className="ingredientsTitle">Ingredients</h5>
+          <Button className="saveButton" onClick={onSaveHandler}>
+            Save
+          </Button>
           <div className="lists">
             <div className="listDiv">
               <ul className="ingredients">
@@ -185,9 +188,6 @@ const CocktailList = (props) => {
 
           <h5 className="title">Instructions</h5>
           <p className="instructions">{instructions.strInstructions}</p>
-          <Button className="saveButton" onClick={onSaveHandler}>
-            Save
-          </Button>
         </Card.Text>
       </Card>
     </>

@@ -64,7 +64,7 @@ app.post("/create", upload.single("cocktailPhoto"), async (req, res) => {
 
     //Check if file exists
     if (!cocktailPhoto) {
-      return res.status(400).json({ error: "Audio file is missing" });
+      return res.status(400).json({ error: "Photo is missing" });
     }
 
     const s3Params = {
